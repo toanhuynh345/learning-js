@@ -10,15 +10,17 @@ Shape.prototype = {
     btnClick: null,
     effect: null,
     state: true,
+    circleTogether: null,
     init: function (options) {
         var that = this;
         that.rectangle = options.rectangle ? $(options.rectangle) : null;
-        that.circle =  options.circle ? $(options.circle) : null;
-        that.circleVertical =  options.circleVertical ? $(options.circleVertical) : null;
+        that.circle = options.circle ? $(options.circle) : null;
+        that.circleVertical = options.circleVertical ? $(options.circleVertical) : null;
         that.rectangleLeft = options.rectangleLeft ? $(options.rectangleLeft) : null;
         that.btnClick = options.btnClick ? $(options.btnClick) : null;
         that.effect = options.effect ? $(options.effect) : null;
-        that.render().renderCircle().renderCircleVertical().renderRectangleLeft().eventClick();
+        that.circleTogether = options.circleTogether ? $(options.circleTogether) : null;
+        that.render().renderCircle().renderCircleVertical().renderRectangleLeft().renderCircleTogether().eventClick();
         return that
     },
     render: function (n = 1) {
@@ -32,7 +34,7 @@ Shape.prototype = {
                 width: "linear",
                 height: "easeInElastic"
             },
-            step: function (now){
+            step: function (now) {
                 $(this).css({
                     transform: 'rotate(' + now + 'deg)',
                 });
@@ -44,14 +46,13 @@ Shape.prototype = {
         });
         return that;
     },
-    renderMoon: function(n = 1)
-    {
+    renderMoon: function (n = 1) {
         var that = this;
         that.rectangle.animate({
             width: 80,
             height: 80,
             borderRadius: 40,
-            backgroundColor:"blue",
+            backgroundColor: "blue",
         }, {
             duration: 1000,
             specialEasing: {
@@ -74,11 +75,8 @@ Shape.prototype = {
         var that = this;
         let left = !n ? "-500" : "500";
         that.circle.animate({
-            // height: '500',
-            // width: '500',
             top: left,
             left: left,
-            // rotate: n * 360,
             backgroundColor: "yellow",
         }, {
             duration: 3000,
@@ -97,11 +95,7 @@ Shape.prototype = {
         var that = this;
         let left = !n ? "-300" : "300";
         that.rectangleLeft.animate({
-            // height: '500',
-            // width: '500',
-            // top: left,
             left: left,
-            // rotate: n * 360,
             backgroundColor: "#8e0ca3",
         }, {
             duration: 3000,
@@ -120,13 +114,11 @@ Shape.prototype = {
         var that = this;
         let top = !n ? "-200" : "200";
         that.circleVertical.animate({
-            // height: '500',
-            // width: '500',
+            opacity: 0.25,
             top: top,
-            // left: left,
-            // rotate: n * 360,
             backgroundColor: "green",
         }, {
+            easing: 'easeOutExpo',
             duration: 3000,
             specialEasing: {
                 width: "linear",
@@ -139,7 +131,25 @@ Shape.prototype = {
         });
         return that;
     },
-    eventClick: function(){
+    renderCircleTogether: function (n = true) {
+        var that = this;
+        let top = !n ? "-200" : "200";
+        that.circleTogether.animate({
+            backgroundColor: "red",
+            opacity: 0.5,
+            right:top,
+            top:top,
+            transition: 'width 2s'
+        }, {
+            duration: 2000,
+            complete: function () {
+                n = !n;
+                that.renderCircleTogether(n);
+            }
+        });
+        return that;
+    },
+    eventClick: function () {
         var that = this;
         that.btnClick.on("click", function () {
             that.effect.animate({
@@ -153,8 +163,6 @@ Shape.prototype = {
         });
         return that;
     }
-
-
 
 
 };

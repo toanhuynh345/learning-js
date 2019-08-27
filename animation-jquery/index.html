@@ -40,15 +40,33 @@
             padding: 0.4em;
             text-align: center;
         }
+        .vertical{
+            display: flex;
+        }
+        div.circleTogether {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: black;
+            position: relative
+        }
     </style>
 </head>
 <body>
-    <div class="rectangle" style="width: 50px;height: 50px;background-color: black"></div>
+<div style="position:absolute">
+    <div class="rectangle" style="width: 50px;height: 50px;background-color: black">
+        <div class="small circle" style="width: 10px;height: 10px;background-color: green"></div>
+    </div>
     <div style="margin-bottom:50px"> </div>
-    <div class="circle" style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: absolute"></div>
-    <div class="circleVertical" style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: absolute"></div>
-    <div class="rectangleLeft" style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: absolute"></div>
-    <div class="toggler">
+    <div class="circle" style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: relative"></div>
+    <div class="vertical">
+        <div class="circleVertical"
+             style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: relative">
+        </div>
+        <div class="circleTogether"></div>
+    </div>
+    <div class="rectangleLeft" style="width: 50px;height: 50px;border-radius: 50%;background-color: black;position: relative"></div>
+    <div class="toggler" style="position: relative">
         <div id="effect" class="ui-widget-content ui-corner-all">
             <h3 class="ui-widget-header ui-corner-all">Animate</h3>
             <p>
@@ -56,8 +74,8 @@
             </p>
         </div>
     </div>
-
     <button id="button" class="ui-state-default ui-corner-all">Toggle Effect</button>
+</div>
 
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -74,7 +92,8 @@
             rectangleLeft: '.rectangleLeft',
             btnClick: '#button',
             moon: '#moon',
-            effect: '#effect'
+            effect: '#effect',
+            circleTogether: '.circleTogether',
         });
     });
 

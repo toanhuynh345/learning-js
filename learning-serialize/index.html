@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Serialize</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+<body>
+<form>
+    <div><input type="text" name="name" value="" id="name" placeholder="name"></div>
+    <div><input type="text" name="address" value="" id="address"  placeholder="address"></div>
+    <div><input type="hidden" name="id" value="" id="id"></div>
+    <div>
+        <textarea name="description" rows="8" cols="40" placeholder="blah blah..."></textarea>
+    </div>
+    <div>
+        Division:
+        <select name="division">
+        <option value="5" selected="selected"> HR </option>
+        <option value="6">DTC</option>
+        <option value="7">EAS</option>
+    </select></div>
+    <div>
+        Hobbies:
+        <input type="checkbox" name="hobbies" value="Soccer" id="Soccer">Soccer
+        <input type="checkbox" name="hobbies" value="BasketBall" id="BasketBall">BasketBall
+    </div>
+    <div>
+        <input type="submit" name="submit" value="Submit" id="submit">
+    </div>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="serialize.js"></script>
+<script>
+    $(document).ready(function(){
+        let serialize = new Serialize({
+            eventSubmit: "#submit"
+        })
+    });
+</script>
+</body>
+</html>
